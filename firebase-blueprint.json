@@ -1,0 +1,90 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Information about a user stored in the system, retrieved from Google authentication.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Unique identifier of the user (matching Firebase Auth uid)"
+        },
+        "name": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Google Profile picture URL"
+        },
+        "joinedDate": {
+          "type": "string",
+          "description": "Sign up date formatted as YYYY-MM-DD"
+        },
+        "ecoPoints": {
+          "type": "number",
+          "description": "Earned climate action points"
+        },
+        "totalSavedCO2": {
+          "type": "number",
+          "description": "Total CO2 saved in kg"
+        },
+        "dailyStreak": {
+          "type": "number",
+          "description": "Streak of consecutive entries logged"
+        },
+        "weeklyTarget": {
+          "type": "number",
+          "description": "CO2 target limit in kg"
+        }
+      },
+      "required": ["uid", "name", "photoURL", "joinedDate", "ecoPoints", "totalSavedCO2", "dailyStreak", "weeklyTarget"]
+    },
+    "UserFeedback": {
+      "title": "UserFeedback",
+      "description": "Feedback, questions or issue submissions provided by signed-in users.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "UID of the submitter"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the user"
+        },
+        "category": {
+          "type": "string",
+          "description": "Categorization of feedback (feedback, question, bug, suggestion)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed text feedback/question"
+        },
+        "screenshot": {
+          "type": "string",
+          "description": "Optional Base64 encoded screenshot data string"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of when the feedback was sent"
+        }
+      },
+      "required": ["userId", "email", "name", "category", "description", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User account documents containing climate dashboard settings and profiles"
+    },
+    "/feedback/{feedbackId}": {
+      "schema": "UserFeedback",
+      "description": "A collection containing feedback items, screenshot uploads, and inquiries from users"
+    }
+  }
+}

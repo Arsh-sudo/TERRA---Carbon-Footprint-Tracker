@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme {
+  --font-serif: "Lora", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  
+  --color-brand-earth: var(--brand-earth);
+  --color-brand-moss: var(--brand-moss);
+  --color-brand-sage: var(--brand-sage);
+  --color-brand-clay: var(--brand-clay);
+  --color-brand-sand: var(--brand-sand);
+  --color-brand-milk: var(--brand-milk);
+  --color-brand-stone: var(--brand-stone);
+}
+
+:root {
+  --brand-earth: #5a5a40;
+  --brand-moss: #a3b18a;
+  --brand-sage: #8a8a75;
+  --brand-clay: #707060;
+  --brand-sand: #f5f5f0;
+  --brand-milk: #f9f9f6;
+  --brand-stone: #3d3d33;
+  --white-core: #ffffff;
+}
+
+:root.dark {
+  --brand-earth: #e5cb9f;
+  --brand-moss: #9ab083;
+  --brand-sage: #9ca3af;
+  --brand-clay: #cbd5e1;
+  --brand-sand: #121210;
+  --brand-milk: #1c1c18;
+  --brand-stone: #ececec;
+  --white-core: #1c1c18;
+}
+
+body {
+  background-color: var(--brand-sand);
+  color: var(--brand-stone);
+  font-family: var(--font-sans);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Hide scrollbar globally for a seamless, clean visual experience while retaining mouse wheel and touch scrolling */
+::-webkit-scrollbar {
+  display: none !important;
+}
+
+html, body, * {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;     /* Firefox */
+}
+
+/* Custom dark mode overrides for hardcoded border colors and utility backgrounds */
+.dark [class*="border-[#e5e5dc]"] {
+  border-color: #2a2a24 !important;
+}
+
+.dark [class*="bg-[#f0f0e8]"] {
+  background-color: #242420 !important;
+}
+
+.dark [class*="bg-[#e5e5dc]"] {
+  background-color: #2e2e28 !important;
+}
+
+.dark [class*="border-[#d1d1c4]"] {
+  border-color: #2e2e28 !important;
+}
+
+.dark [class*="bg-brand-sand/90"] {
+  background-color: rgba(20, 20, 18, 0.9) !important;
+}
+
+.dark .bg-brand-earth\/10 {
+  background-color: rgba(229, 203, 159, 0.1) !important;
+}
+
+/* Particle background container */
+#particle-canvas-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Border Glow on Sections using mouse tracking! */
+.glow-effect {
+  position: relative;
+  z-index: 1;
+}
+
+.glow-effect::after {
+  content: "";
+  position: absolute;
+  inset: -1px; /* 1px outside the container boundary */
+  border-radius: 32px; /* Matches rounded-[32px] on sections */
+  padding: 1px; /* The thickness of the glow border */
+  background: radial-gradient(
+    400px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(144, 180, 110, 1),
+    transparent 40%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.glow-effect:hover::after {
+  opacity: 1;
+}
+
+html.dark .glow-effect::after {
+  background: radial-gradient(
+    400px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(168, 191, 145, 0.7),
+    transparent 40%
+  );
+}
+

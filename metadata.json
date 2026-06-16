@@ -1,0 +1,8 @@
+{
+  "name": "Carbon Tracker",
+  "description": "Track and reduce your daily carbon footprint.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
